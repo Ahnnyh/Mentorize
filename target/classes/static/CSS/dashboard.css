@@ -1,0 +1,714 @@
+/* ===== VARIÁVEIS COSMIC DEEP GLASS ===== */
+:root {
+    /* Cores principais - Preto e tons escuros */
+    --black: #000000;
+    --dark-1: #0a0a0a;
+    --dark-2: #111111;
+    --dark-3: #1a1a1a;
+    
+    /* Cores de destaque - Tons escuros e elegantes */
+    --purple-dark: #4c1d95;
+    --purple-darker: #371a74;
+    --blue-dark: #1e3a8a;
+    --blue-darker: #1e40af;
+    
+    /* Cores de texto */
+    --text-primary: #ffffff;
+    --text-secondary: #e5e7eb;
+    --text-muted: #9ca3af;
+    
+    /* Efeitos Glass */
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+    --glass-blur: blur(20px);
+    --transition: all 0.3s ease;
+}
+
+/* ===== RESET E BASE ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    background: var(--black);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* ===== SCROLL PERSONALIZADO ===== */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--dark-2);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* ===== LAYOUT DO DASHBOARD ===== */
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* ===== HEADER ELEGANTE ===== */
+.dashboard-header {
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.dashboard-header h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #e3dcf3;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.5px;
+}
+
+.dashboard-header p {
+    color: #e3dcf3;
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+/* ===== GRID DE STATS PRINCIPAIS ===== */
+.stats-main-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+/* ===== CARDS GLASS ELEGANTES ===== */
+.glass-card-elegant {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
+    border-radius: 16px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition);
+    box-shadow: var(--glass-shadow);
+}
+
+.glass-card-elegant::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(76, 29, 149, 0.1) 0%,
+        rgba(30, 58, 138, 0.1) 100%
+    );
+    opacity: 0;
+    transition: var(--transition);
+    z-index: -1;
+}
+
+.glass-card-elegant:hover::before {
+    opacity: 1;
+}
+
+.glass-card-elegant:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 
+        0 12px 40px 0 rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(76, 29, 149, 0.1);
+}
+
+/* ===== CONTEÚDO DOS CARDS DE STATS ===== */
+.stat-card-content-elegant {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.stat-info-elegant {
+    flex: 1;
+}
+
+.stat-value-elegant {
+    font-size: 2.75rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+    letter-spacing: -1px;
+}
+
+.stat-label-elegant {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.5px;
+}
+
+.stat-trend-elegant {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.trend-up {
+    color: #10b981;
+}
+
+.trend-down {
+    color: #ef4444;
+}
+
+/* ===== ÍCONES ELEGANTES ===== */
+.stat-icon-elegant {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: var(--transition);
+}
+
+.glass-card-elegant:hover .stat-icon-elegant {
+    background: rgba(255, 255, 255, 0.08);
+    transform: scale(1.05);
+}
+
+/* Cores específicas para cada ícone */
+.icon-tasks-elegant {
+    color: var(--text-primary);
+    background: rgba(76, 29, 149, 0.2) !important;
+}
+
+.icon-goals-elegant {
+    color: var(--text-primary);
+    background: rgba(30, 58, 138, 0.2) !important;
+}
+
+.icon-productivity-elegant {
+    color: var(--text-primary);
+    background: rgba(16, 185, 129, 0.2) !important;
+}
+
+/* ===== SEÇÃO DE METAS EM DESTAQUE ===== */
+.featured-goals-section-elegant {
+    margin-top: 2rem;
+}
+
+.section-title-elegant {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.section-title-elegant i {
+    color: var(--purple-dark);
+    background: rgba(76, 29, 149, 0.1);
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+}
+
+/* ===== GRID DE METAS ELEGANTE ===== */
+.featured-goals-grid-elegant {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+/* ===== CARDS DE METAS ELEGANTES ===== */
+.goal-card-elegant {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
+    border-radius: 16px;
+    padding: 1.75rem;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--glass-shadow);
+}
+
+.goal-card-elegant::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--purple-dark), var(--blue-dark));
+    transition: var(--transition);
+}
+
+.goal-card-elegant:hover::before {
+    background: linear-gradient(90deg, var(--blue-dark), var(--purple-dark));
+}
+
+.goal-card-elegant:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.6);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Header da meta */
+.goal-header-elegant {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    gap: 1rem;
+}
+
+.goal-title-elegant {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+    flex: 1;
+}
+
+.goal-progress-elegant {
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--purple-dark), var(--blue-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    min-width: 60px;
+    text-align: right;
+}
+
+/* Descrição */
+.goal-description-elegant {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+}
+
+/* Barra de progresso */
+.progress-container-elegant {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.progress-bar-elegant {
+    flex: 1;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    backdrop-filter: blur(5px);
+    position: relative;
+}
+
+.progress-fill-elegant {
+    height: 100%;
+    background: linear-gradient(90deg, var(--purple-dark), var(--blue-dark));
+    border-radius: 10px;
+    position: relative;
+    transition: width 1s ease-in-out;
+    min-width: 8px;
+}
+
+.progress-fill-elegant::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.4), 
+        transparent
+    );
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.progress-text-elegant {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    min-width: 45px;
+    text-align: right;
+}
+
+/* Badges e informações adicionais */
+.goal-badge-elegant {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-top: 1rem;
+    backdrop-filter: blur(10px);
+    transition: var(--transition);
+}
+
+.goal-badge-elegant:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
+}
+
+.goal-badge-elegant.urgent {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #ef4444;
+}
+
+.goal-badge-elegant.overdue {
+    background: rgba(239, 68, 68, 0.2);
+    border: 1px solid rgba(239, 68, 68, 0.4);
+    color: #ffffff;
+}
+
+/* Prioridades */
+.goal-priority {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-left: 0.5rem;
+}
+
+.priority-alta {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.priority-media {
+    background: rgba(245, 158, 11, 0.2);
+    color: #f59e0b;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.priority-baixa {
+    background: rgba(34, 197, 94, 0.2);
+    color: #22c55e;
+    border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+/* Ações das metas */
+.goal-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    justify-content: flex-end;
+}
+
+.btn-goal-action {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+}
+
+.btn-goal-action:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    transform: scale(1.1);
+}
+
+/* Estado vazio para metas */
+.empty-goals-state-elegant {
+    text-align: center;
+    padding: 3rem 2rem;
+    grid-column: 1 / -1;
+    color: var(--text-secondary);
+}
+
+.empty-icon-elegant {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(76, 29, 149, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 2rem;
+    color: var(--purple-dark);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.empty-goals-state-elegant h3 {
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.empty-goals-state-elegant p {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+.btn-create-goal-elegant {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 0.75rem 1.5rem;
+    color: var(--text-primary);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    backdrop-filter: blur(10px);
+}
+
+.btn-create-goal-elegant:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+/* ===== ANIMAÇÕES SUAVES ===== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.glass-card-elegant {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.glass-card-elegant:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.glass-card-elegant:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.goal-card-elegant {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.goal-card-elegant:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.goal-card-elegant:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+/* Estados de progresso */
+.high-priority::before {
+    background: linear-gradient(90deg, #ef4444, #dc2626) !important;
+}
+
+.medium-priority::before {
+    background: linear-gradient(90deg, #f59e0b, #d97706) !important;
+}
+
+/* Efeitos de foco para acessibilidade */
+.goal-card-elegant:focus-within {
+    outline: 2px solid var(--purple-dark);
+    outline-offset: 2px;
+}
+
+.btn-goal-action:focus {
+    outline: 2px solid var(--blue-dark);
+    outline-offset: 2px;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 768px) {
+    .dashboard-container {
+        padding: 1rem;
+    }
+    
+    .stats-main-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .featured-goals-grid-elegant {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .glass-card-elegant {
+        padding: 1.5rem;
+    }
+    
+    .stat-value-elegant {
+        font-size: 2.25rem;
+    }
+    
+    .stat-icon-elegant {
+        width: 56px;
+        height: 56px;
+        font-size: 1.25rem;
+    }
+    
+    .goal-header-elegant {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .goal-progress-elegant {
+        text-align: left;
+    }
+    
+    .progress-container-elegant {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+    }
+    
+    .progress-text-elegant {
+        text-align: left;
+    }
+    
+    .goal-actions {
+        justify-content: flex-start;
+    }
+    
+    .section-title-elegant {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-header h1 {
+        font-size: 2rem;
+    }
+    
+    .stat-card-content-elegant {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .stat-icon-elegant {
+        align-self: flex-end;
+    }
+    
+    .goal-card-elegant {
+        padding: 1.25rem;
+    }
+    
+    .goal-title-elegant {
+        font-size: 1.1rem;
+    }
+    
+    .goal-progress-elegant {
+        font-size: 1.3rem;
+    }
+    
+    .section-title-elegant {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .section-title-elegant i {
+        align-self: flex-start;
+    }
+}
+
+/* ===== LOGO NO DASHBOARD ===== */
+.dashboard-header {
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.logo-container {
+    margin-bottom: 1rem;
+}
+
+/* Opção 1: Logo como Imagem */
+.dashboard-logo {
+    max-width: 400px;
+    height: auto;
+    transition: var(--transition);
+}
+
+.dashboard-logo:hover {
+    transform: scale(1.05);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .dashboard-logo {
+        max-width: 150px;
+    }
+    
+    .logo-text {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-logo {
+        max-width: 120px;
+    }
+    
+    .logo-text {
+        font-size: 1.75rem;
+    }
+}
