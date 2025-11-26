@@ -1,6 +1,6 @@
 Mentorize
 
-Sistema de organização pessoal para estudantes com tema Cosmic Deep.
+Sistema de organização pessoal.
 
 ## Funcionalidades
 - Dashboard com métricas de produtividade
