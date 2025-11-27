@@ -113,26 +113,35 @@ class Dashboard {
         }
     }
 
-    static updateStats(tasks, studies, goals) {
-        // Total de tarefas pendentes
-        const pendingTasks = tasks.filter(task => !task.concluida).length;
-        this.updateStatElement('totalTasks', pendingTasks);
-        
-        // Metas concluídas
-        const completedGoals = goals.filter(goal => (goal.progresso || 0) >= 100).length;
-        this.updateStatElement('goalsCompleted', completedGoals);
+static updateStats(tasks, studies, goals) {
+    // Total de tarefas pendentes
+    const pendingTasks = tasks.filter(task => !task.concluida).length;
+    this.updateStatElement('totalTasks', pendingTasks);
+    
+    // Metas concluídas
+    const completedGoals = goals.filter(goal => (goal.progresso || 0) >= 100).length;
+    this.updateStatElement('goalsCompleted', completedGoals);
 
-        // Score de produtividade (cálculo melhorado)
-        const totalStudies = studies.length;
-        const completedStudies = studies.filter(study => study.concluido).length;
-        const totalItems = totalStudies + goals.length;
-        const completedItems = completedStudies + completedGoals;
-        const productivity = totalItems > 0 ? Math.min(100, Math.round((completedItems / totalItems) * 100)) : 0;
-        this.updateStatElement('productivityScore', `${productivity}%`);
-
-        // Atualizar tendências
-        this.updateTrends(tasks, studies, goals);
+    // ⭐⭐ CORREÇÃO: Score de produtividade em porcentagem
+    const totalStudies = studies.length;
+    const completedStudies = studies.filter(study => study.concluido).length;
+    const totalItems = totalStudies + goals.length;
+    const completedItems = completedStudies + completedGoals;
+    
+    let productivity = 0;
+    if (totalItems > 0) {
+        productivity = Math.min(100, Math.round((completedItems / totalItems) * 100));
     }
+    
+    // ⭐⭐ CORREÇÃO: Garantir que mostre com símbolo de porcentagem
+    const productivityElement = document.getElementById('productivityScore');
+    if (productivityElement) {
+        productivityElement.textContent = `${productivity}%`;
+    }
+
+    // Atualizar tendências
+    this.updateTrends(tasks, studies, goals);
+}
 
     static updateStatElement(elementId, value) {
         const element = document.getElementById(elementId);
@@ -224,21 +233,25 @@ class Dashboard {
         const featuredGoalsContainer = document.getElementById('featuredGoalsGrid');
         if (!featuredGoalsContainer) return;
 
+        console.log('Metas recebidas para destaque:', goals);
+
         // Ordenar metas: não concluídas primeiro, depois por progresso decrescente
         const sortedGoals = goals
             .filter(goal => (goal.progresso || 0) < 100) // Apenas metas não concluídas
             .sort((a, b) => (b.progresso || 0) - (a.progresso || 0))
             .slice(0, 3); // Pegar apenas as 3 principais
 
+        console.log('Metas filtradas para destaque:', sortedGoals);
+
         if (sortedGoals.length === 0) {
             featuredGoalsContainer.innerHTML = `
-                <div class="empty-state-glass">
-                    <div class="empty-icon-glass">
+                <div class="empty-goals-state-elegant">
+                    <div class="empty-icon-elegant">
                         <i class="fas fa-bullseye"></i>
                     </div>
                     <h3>Nenhuma Meta em Andamento</h3>
                     <p>Comece criando sua primeira meta!</p>
-                    <button class="btn-create-glass" onclick="app.openGoalModal()">
+                    <button class="btn-create-goal-elegant" onclick="app.openGoalModal()">
                         <i class="fas fa-plus"></i>
                         Criar Primeira Meta
                     </button>
@@ -249,8 +262,12 @@ class Dashboard {
 
         featuredGoalsContainer.innerHTML = sortedGoals.map((goal, index) => {
             const progress = goal.progresso || 0;
-            const deadline = goal.prazo ? new Date(goal.prazo) : null;
+            const deadline = goal.dataLimite ? new Date(goal.dataLimite) : null;
             const now = new Date();
+            
+            // ⭐ CORREÇÃO: Usar goal.nome em vez de goal.titulo
+            const goalTitle = goal.nome || goal.titulo || 'Meta sem título';
+            const goalDescription = goal.descricao || '';
             
             // Calcular dias restantes
             let badgeContent = '';
@@ -258,21 +275,21 @@ class Dashboard {
                 const daysLeft = Math.ceil((deadline - now) / (1000 * 60 * 60 * 24));
                 if (daysLeft > 0) {
                     badgeContent = `
-                        <div class="goal-badge-glass">
+                        <div class="goal-badge-elegant">
                             <i class="fas fa-clock"></i>
                             <span>${daysLeft} ${daysLeft === 1 ? 'dia' : 'dias'} restantes</span>
                         </div>
                     `;
                 } else if (daysLeft === 0) {
                     badgeContent = `
-                        <div class="goal-badge-glass urgent">
+                        <div class="goal-badge-elegant urgent">
                             <i class="fas fa-exclamation-triangle"></i>
                             <span>Vence hoje!</span>
                         </div>
                     `;
                 } else {
                     badgeContent = `
-                        <div class="goal-badge-glass overdue">
+                        <div class="goal-badge-elegant overdue">
                             <i class="fas fa-calendar-times"></i>
                             <span>Atrasada ${Math.abs(daysLeft)} dias</span>
                         </div>
@@ -285,44 +302,49 @@ class Dashboard {
             let priorityBadge = '';
             if (goal.prioridade === 'ALTA') {
                 priorityClass = 'high-priority';
-                priorityBadge = '<div class="goal-priority priority-alta">Alta</div>';
+                priorityBadge = '<span class="goal-priority priority-alta">Alta</span>';
             } else if (goal.prioridade === 'MEDIA') {
                 priorityClass = 'medium-priority';
-                priorityBadge = '<div class="goal-priority priority-media">Média</div>';
+                priorityBadge = '<span class="goal-priority priority-media">Média</span>';
             } else if (goal.prioridade === 'BAIXA') {
-                priorityBadge = '<div class="goal-priority priority-baixa">Baixa</div>';
+                priorityBadge = '<span class="goal-priority priority-baixa">Baixa</span>';
             }
 
             return `
-                <div class="goal-card-glass ${priorityClass}" style="animation-delay: ${index * 0.15}s">
-                    <div class="goal-header-glass">
-                        <div>
-                            <h3 class="goal-title-glass">${Utils.escapeHtml(goal.titulo)}</h3>
-                            <div class="goal-progress-glass">${progress}%</div>
+                <div class="goal-card-elegant ${priorityClass}" style="animation-delay: ${index * 0.15}s">
+                    <div class="goal-header-elegant">
+                        <div class="goal-title-container">
+                            <h3 class="goal-title-elegant">
+                                ${Utils.escapeHtml(goalTitle)}
+                                ${priorityBadge}
+                            </h3>
                         </div>
-                        ${priorityBadge}
+                        <div class="goal-progress-elegant">${progress}%</div>
                     </div>
-                    ${goal.descricao ? `
-                        <p class="goal-description-glass">${Utils.escapeHtml(goal.descricao)}</p>
+                    
+                    ${goalDescription ? `
+                        <p class="goal-description-elegant">${Utils.escapeHtml(goalDescription)}</p>
                     ` : ''}
-                    <div class="progress-container-glass">
-                        <div class="progress-bar-glass">
-                            <div class="progress-fill-glass" style="width: ${progress}%"></div>
+                    
+                    <div class="progress-container-elegant">
+                        <div class="progress-bar-elegant">
+                            <div class="progress-fill-elegant" style="width: ${progress}%"></div>
                         </div>
-                        <span class="progress-text-glass">${progress}%</span>
+                        <span class="progress-text-elegant">${progress}%</span>
                     </div>
-                    ${badgeContent}
-                    <div class="goal-actions">
-                        <button class="btn-goal-action" onclick="Dashboard.editGoal(${goal.id})" title="Editar meta">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="btn-goal-action" onclick="Dashboard.updateGoalProgress(${goal.id}, ${progress + 10})" title="Avançar 10%">
-                            <i class="fas fa-plus"></i>
-                        </button>
-                        <button class="btn-goal-action" onclick="Dashboard.viewGoalDetails(${goal.id})" title="Ver detalhes">
-                            <i class="fas fa-eye"></i>
-                        </button>
+                    
+                    <div class="goal-meta-info">
+                        ${badgeContent}
+                        
+                        ${goal.tipo ? `
+                            <div class="goal-badge-elegant">
+                                <i class="fas fa-tag"></i>
+                                ${Utils.escapeHtml(goal.tipo)}
+                            </div>
+                        ` : ''}
                     </div>
+                    
+                    <!-- REMOVIDOS: Os botões de ação que estavam aqui -->
                 </div>
             `;
         }).join('');
@@ -345,11 +367,11 @@ class Dashboard {
                 this.loadDashboardData();
                 
                 // Mostrar notificação de sucesso
-                this.showNotification('Progresso da meta atualizado! 🎯', 'success');
+                this.showNotification('Progresso da meta atualizado!', 'success');
             }
         } catch (error) {
             console.error('Erro ao atualizar progresso da meta:', error);
-            this.showNotification('Erro ao atualizar progresso 😞', 'error');
+            this.showNotification('Erro ao atualizar progresso', 'error');
         }
     }
 

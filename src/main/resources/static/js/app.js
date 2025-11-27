@@ -164,6 +164,7 @@ class MentorizeApp {
             console.error('Erro ao carregar contagem de tarefas:', error);
         }
     }
+
 }
 
 // Inicialização segura

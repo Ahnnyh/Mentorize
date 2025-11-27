@@ -33,11 +33,20 @@
 }
 
 body {
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-    background: var(--black);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: 
+        linear-gradient(
+            135deg,
+            rgba(10, 10, 10, 0.92) 0%,
+            rgba(26, 26, 26, 0.88) 50%,
+            rgba(10, 10, 10, 0.95) 100%
+        ),
+        url('../img/fundo.png') center/cover fixed !important;
     color: var(--text-primary);
     line-height: 1.6;
     min-height: 100vh;
+    margin: 0;
+    padding: 0;
 }
 
 /* ===== SCROLL PERSONALIZADO ===== */
@@ -711,4 +720,387 @@ body {
     .logo-text {
         font-size: 1.75rem;
     }
+}
+
+/* ===== ESTADO VAZIO DASHBOARD ===== */
+.empty-state-dashboard {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: var(--text-secondary);
+}
+
+.empty-state-dashboard .empty-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(76, 29, 149, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 2rem;
+    color: var(--purple-dark);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.empty-state-dashboard h3 {
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+.empty-state-dashboard p {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.empty-state-dashboard .btn-create {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 0.75rem 1.5rem;
+    color: var(--text-primary);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    backdrop-filter: blur(10px);
+    font-size: 0.9rem;
+}
+
+.empty-state-dashboard .btn-create:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+/* Aplicar ao estado vazio do dashboard */
+.featured-goals-grid-elegant .empty-goals-state-elegant {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    width: 100%;
+}
+
+/* Garantir que o grid ocupe toda a largura quando vazio */
+.featured-goals-grid-elegant:has(.empty-goals-state-elegant) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Adicione isto ao dashboard.css */
+.dashboard-container {
+    position: relative;
+    overflow: hidden;
+}
+
+/* BACKGROUND COM IMAGEM */
+.background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    background-image: url('../img/fundo.png'); /* Altere para o caminho da sua imagem */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg,
+        rgba(10, 10, 10, 0.85) 0%,
+        rgba(26, 26, 26, 0.80) 50%,
+        rgba(10, 10, 10, 0.90) 100%
+    );
+    backdrop-filter: blur(2px);
+}
+
+
+/* Ajuste para garantir legibilidade do conteúdo */
+.dashboard-container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Se quiser um efeito mais escuro */
+.dark-overlay .background-overlay {
+    background: linear-gradient(
+        135deg,
+        rgba(0, 0, 0, 0.9) 0%,
+        rgba(10, 10, 10, 0.85) 50%,
+        rgba(0, 0, 0, 0.95) 100%
+    );
+}
+
+/* ===== ESTADO VAZIO ANOTAÇÕES ===== */
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--text-primary);
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+}
+
+.empty-state .empty-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(244, 234, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 2rem;
+    color: var(--text-primary);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.empty-state h3 {
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+.empty-state p {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+}
+
+/* ===== CORREÇÃO ESPECÍFICA PARA ESTADO VAZIO DASHBOARD ===== */
+#featuredGoalsGrid .empty-goals-state-elegant {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--text-secondary);
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    width: 100%;
+}
+
+#featuredGoalsGrid .empty-goals-state-elegant .empty-icon-elegant {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(76, 29, 149, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 2rem;
+    color: var(--purple-dark);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#featuredGoalsGrid .empty-goals-state-elegant h3 {
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+#featuredGoalsGrid .empty-goals-state-elegant p {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+}
+
+#featuredGoalsGrid .empty-goals-state-elegant .btn-create-goal-elegant {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 0.75rem 1.5rem;
+    color: var(--text-primary);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    backdrop-filter: blur(10px);
+    font-size: 0.9rem;
+}
+
+#featuredGoalsGrid .empty-goals-state-elegant .btn-create-goal-elegant:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+/* Garantir que o grid ocupe toda a largura quando vazio */
+#featuredGoalsGrid:has(.empty-goals-state-elegant) {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+}
+
+/* ===== ESTILIZAÇÃO PARA SELECT (DROPDOWN) ===== */
+select {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 0.75rem;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    backdrop-filter: blur(10px);
+    transition: var(--transition);
+    width: 100%;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23ffffff'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1rem;
+    padding-right: 2.5rem;
+}
+
+select:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+select:focus {
+    outline: none;
+    border-color: var(--purple-dark);
+    box-shadow: 0 0 0 2px rgba(76, 29, 149, 0.2);
+}
+
+/* Estilização das options */
+select option {
+    background: var(--dark-2);
+    color: var(--text-primary);
+    border: none;
+    padding: 0.75rem;
+}
+
+/* Para navegadores WebKit (Chrome, Safari, Edge) */
+select::-webkit-listbox {
+    background: var(--dark-2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+select::-webkit-option {
+    background: var(--dark-2);
+    color: var(--text-primary);
+    padding: 0.75rem;
+}
+
+select::-webkit-option:hover {
+    background: rgba(76, 29, 149, 0.2);
+}
+
+select::-webkit-option:checked {
+    background: rgba(76, 29, 149, 0.3);
+    color: var(--text-primary);
+}
+
+/* Estados específicos para prioridades */
+select#taskPriority option[value="BAIXA"] {
+    color: #22c55e;
+}
+
+select#taskPriority option[value="MEDIA"] {
+    color: #f59e0b;
+}
+
+select#taskPriority option[value="ALTA"] {
+    color: #ef4444;
+}
+
+/* ===== BACKGROUND COM IMAGEM - CORRIGIDO ===== */
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-image: url('img/fundo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg,
+        rgba(10, 10, 10, 0.85) 0%,
+        rgba(26, 26, 26, 0.80) 50%,
+        rgba(10, 10, 10, 0.90) 100%
+    );
+    backdrop-filter: blur(2px);
+}
+
+/* Garantir que o conteúdo fique acima do background */
+.app-container {
+    position: relative;
+    z-index: 1;
+}
+
+/* ===== BACKGROUND FIX ===== */
+#main-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1000;
+    background-image: url('../img/fundo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.background-overlay-fixed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg,
+        rgba(10, 10, 10, 0.92) 0%,
+        rgba(26, 26, 26, 0.88) 50%,
+        rgba(10, 10, 10, 0.95) 100%
+    );
+}
+
+/* Garantir que o conteúdo fique acima do background */
+.app-container {
+    position: relative;
+    z-index: 1;
 }

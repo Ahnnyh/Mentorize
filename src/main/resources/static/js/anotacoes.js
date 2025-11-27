@@ -11,6 +11,16 @@ class AnotacaoManager {
 
     setupEvents() {
         console.log('Configurando event listeners para anotações...');
+
+        // BOTÃO DO HEADER - CORREÇÃO IMPORTANTE
+        const addNoteBtn = document.getElementById('addNoteBtn');
+        if (addNoteBtn && !addNoteBtn._hasListener) {
+            addNoteBtn.addEventListener('click', () => {
+                console.log('Botão Nova Anotação clicado');
+                this.openModal();
+            });
+            addNoteBtn._hasListener = true;
+        }
         
         // FORMULÁRIO
         const noteForm = document.getElementById('noteForm');
@@ -30,6 +40,11 @@ class AnotacaoManager {
                 this.setView(view);
             });
         });
+
+            // Modal close events
+    document.querySelectorAll('#noteModal .modal-close, #noteModal .btn-secondary').forEach(btn => {
+        btn.addEventListener('click', () => this.closeModal());
+    });
     }
 
     openModal(note = null) {
@@ -305,17 +320,65 @@ class AnotacaoManager {
     getEmptyState() {
         return `
             <div class="empty-state">
-                <i class="fas fa-sticky-note"></i>
-                <h4>Nenhuma anotação</h4>
-                <p>Comece criando sua primeira anotação!</p>
-                <button class="btn-primary" id="addNoteBtn">
+                <div class="empty-icon">
+                    <i class="fas fa-sticky-note"></i>
+                </div>
+                <h3>Nenhuma anotação criada</h3>
+                <p>Clique no botão "Nova Anotação" acima para começar</p>
+            </div>
+        `;
+    };    
+}
+
+// Função para carregar metas em destaque no dashboard
+function loadFeaturedGoals() {
+    const featuredGoalsGrid = document.getElementById('featuredGoalsGrid');
+    if (!featuredGoalsGrid) return;
+
+    // Simular busca de metas (substitua por sua API real)
+    const featuredGoals = []; // Array vazio para simular nenhuma meta
+
+    if (featuredGoals.length === 0) {
+        featuredGoalsGrid.innerHTML = `
+            <div class="empty-goals-state-elegant">
+                <div class="empty-icon-elegant">
+                    <i class="fas fa-bullseye"></i>
+                </div>
+                <h3>Nenhuma meta em destaque</h3>
+                <p>Suas metas aparecerão aqui quando você criá-las!</p>
+                <button class="btn-create-goal-elegant" onclick="app.switchView('goals')">
                     <i class="fas fa-plus"></i>
-                    Nova Anotação
+                    Criar Minha Primeira Meta
                 </button>
             </div>
         `;
+    } else {
+        // Renderizar as metas normalmente
+        featuredGoalsGrid.innerHTML = featuredGoals.map(goal => `
+            <div class="goal-card-elegant">
+                <div class="goal-header-elegant">
+                    <h3 class="goal-title-elegant">${goal.title}</h3>
+                    <div class="goal-progress-elegant">${goal.progress}%</div>
+                </div>
+                <p class="goal-description-elegant">${goal.description}</p>
+                <div class="progress-container-elegant">
+                    <div class="progress-bar-elegant">
+                        <div class="progress-fill-elegant" style="width: ${goal.progress}%"></div>
+                    </div>
+                    <span class="progress-text-elegant">${goal.progress}%</span>
+                </div>
+            </div>
+        `).join('');
     }
 }
+
+// Chamar a função quando o dashboard carregar
+document.addEventListener('DOMContentLoaded', function() {
+    // Verificar se estamos na view do dashboard
+    if (document.getElementById('dashboard').classList.contains('active')) {
+        loadFeaturedGoals();
+    }
+});
 
 // Inicialização global
 let anotacaoManager;

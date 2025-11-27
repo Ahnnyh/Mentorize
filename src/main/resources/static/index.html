@@ -4,18 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mentorize - Organização Inteligente</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'></text></svg>">
     <link rel="stylesheet" href="CSS/styles.css">
     <link rel="stylesheet" href="CSS/dashboard.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+<style>
+    /* BACKGROUND FORÇADO - PRIORIDADE MÁXIMA */
+    body {
+        background:
+            url('http://localhost:8080/img/fundo2.png') center/cover fixed !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        position: relative;
+    }
+    
+    /* Overlay escuro para a imagem de fundo */
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.3); /* Ajuste a opacidade aqui */
+        z-index: -1;
+    }
+
+        /* Garantir que o conteúdo carregue com fundo escuro */
+    .app-container {
+        background: transparent !important;
+        opacity: 0;
+        animation: fadeIn 0.5s ease-in-out 0.1s forwards;
+    }
+
+    @keyframes fadeIn {
+        to {
+            opacity: 1;
+        }
+    }
+    
+    /* Garantir que nada cubra o background */
+    .app-container {
+        background: transparent !important;
+    }
+    
+    .main-content {
+        background: transparent !important;
+    }
+</style>
 </head>
 <body>
+    
     <div class="app-container">
         <!-- Sidebar Navigation -->
         <nav class="sidebar">
             <div class="sidebar-header">
                 <div class="brand">
-                    <!-- REMOVIDO: img src vazia que causa erro 500 -->
                     <h1>Mentorize</h1>
                 </div>
                 <button class="sidebar-toggle" id="sidebarToggle">
@@ -136,20 +180,9 @@
                             Metas em Destaque
                         </h2>
                         
-                        <div class="featured-goals-grid-elegant" id="featuredGoalsGrid">
-                            <!-- As metas serão carregadas dinamicamente aqui -->
-                            <div class="empty-goals-state-elegant">
-                                <div class="empty-icon-elegant">
-                                    <i class="fas fa-bullseye"></i>
-                                </div>
-                                <h3>Nenhuma meta em destaque</h3>
-                                <p>Suas metas aparecerão aqui quando você criá-las!</p>
-                                <button class="btn-create-goal-elegant" onclick="app.switchView('goals')">
-                                    <i class="fas fa-plus"></i>
-                                    Criar Minha Primeira Meta
-                                </button>
-                            </div>
-                        </div>
+                    <div class="featured-goals-grid-elegant" id="featuredGoalsGrid">
+                        <!-- As metas serão carregadas dinamicamente aqui -->
+                    </div>
                     </div>
                 </div>
             </div>

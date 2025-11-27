@@ -158,7 +158,7 @@ class TarefaManager {
     }
 
     async saveTask() {
-       if (this.isSaving) {
+        if (this.isSaving) {
             console.log('⚠️ Save já em andamento, ignorando chamada duplicada');
             return;
         }
@@ -193,6 +193,7 @@ class TarefaManager {
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = 'Salvar';
             }
+            this.isSaving = false; // ⭐ RESETAR A FLAG
             return;
         }
 
@@ -234,6 +235,9 @@ class TarefaManager {
             console.error('Erro ao criar tarefa:', err);
             Utils.showNotification('Erro ao criar tarefa', 'error');
         } finally {
+            // ⭐⭐ IMPORTANTE: SEMPRE RESETAR A FLAG NO FINALLY
+            this.isSaving = false;
+            
             // Reativar botão se existir
             if (submitBtn) {
                 submitBtn.disabled = false;
@@ -275,6 +279,14 @@ class TarefaManager {
     }
 
     async updateTask(id) {
+        // ⭐ ADICIONAR VERIFICAÇÃO DE DUPLICAÇÃO
+        if (this.isSaving) {
+            console.log('⚠️ Update já em andamento, ignorando chamada duplicada');
+            return;
+        }
+        
+        this.isSaving = true;
+        
         console.log('=== DEBUG UPDATE TASK ===');
         console.log('ID:', id);
         
@@ -292,18 +304,20 @@ class TarefaManager {
 
         if (!titulo) {
             Utils.showNotification('Título é obrigatório', 'error');
+            this.isSaving = false; // ⭐ RESETAR
             return;
         }
 
         const payload = { 
             titulo, 
             descricao, 
-            prazo: prazo || null, // APENAS a data, sem modificações
+            prazo: prazo || null,
             prioridade 
         };
 
         console.log('Payload FINAL enviado:', JSON.stringify(payload, null, 2));
-            try {
+        
+        try {
             const res = await fetch(`http://localhost:8080/tarefas/${id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
@@ -321,6 +335,9 @@ class TarefaManager {
         } catch (err) {
             console.error('Erro ao atualizar tarefa:', err);
             Utils.showNotification('Erro ao atualizar tarefa', 'error');
+        } finally {
+            // ⭐⭐ IMPORTANTE: SEMPRE RESETAR A FLAG
+            this.isSaving = false;
         }
     }
 

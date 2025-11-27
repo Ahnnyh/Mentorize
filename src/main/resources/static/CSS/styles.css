@@ -39,10 +39,19 @@
 
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: var(--black);
+    background: 
+        linear-gradient(
+            135deg,
+            rgba(10, 10, 10, 0.92) 0%,
+            rgba(26, 26, 26, 0.88) 50%,
+            rgba(10, 10, 10, 0.95) 100%
+        ),
+        url('../img/fundo.png') center/cover fixed !important;
     color: var(--text-primary);
     line-height: 1.6;
     min-height: 100vh;
+    margin: 0;
+    padding: 0;
 }
 
 /* ===== LAYOUT PRINCIPAL ===== */
@@ -1038,14 +1047,14 @@ body {
 .empty-state {
     text-align: center;
     padding: 3rem 2rem;
-    color: var(--text-secondary);
+    color: var(--text-primary);
 }
 
 .empty-state i {
     font-size: 3rem;
     margin-bottom: 1rem;
     opacity: 0.5;
-    color: var(--purple-dark);
+    color: var(--text-primary);
 }
 
 .empty-state h4 {
@@ -1607,3 +1616,224 @@ body {
 .modal-content {
     z-index: 10001;
 }
+
+/* ===== ESTILIZAÇÃO PARA SELECT (DROPDOWN) ===== */
+select {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 0.75rem;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    backdrop-filter: blur(10px);
+    transition: var(--transition);
+    width: 100%;
+    cursor: pointer;
+}
+
+select:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+select:focus {
+    outline: none;
+    border-color: var(--purple-dark);
+    box-shadow: 0 0 0 2px rgba(76, 29, 149, 0.2);
+}
+
+/* Estilização das options */
+select option {
+    background: var(--dark-2);
+    color: var(--text-primary);
+    border: none;
+    padding: 0.75rem;
+}
+
+/* Para navegadores WebKit (Chrome, Safari, Edge) */
+select::-webkit-listbox {
+    background: var(--dark-2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+select::-webkit-option {
+    background: var(--dark-2);
+    color: var(--text-primary);
+    padding: 0.75rem;
+}
+
+select::-webkit-option:hover {
+    background: rgba(76, 29, 149, 0.2);
+}
+
+select::-webkit-option:checked {
+    background: rgba(76, 29, 149, 0.3);
+    color: var(--text-primary);
+}
+
+/* Para Firefox */
+select option {
+    background: var(--dark-2);
+    color: var(--text-primary);
+}
+
+select option:hover,
+select option:focus,
+select option:checked {
+    background: rgba(76, 29, 149, 0.3);
+}
+
+/* Para Internet Explorer (caso precise) */
+select::-ms-expand {
+    display: none; /* Remove a seta padrão do IE */
+}
+
+/* Seta personalizada do dropdown */
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23ffffff'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1rem;
+    padding-right: 2.5rem;
+}
+
+/* Estados específicos para prioridades */
+select#taskPriority option[value="BAIXA"] {
+    color: #22c55e;
+}
+
+select#taskPriority option[value="MEDIA"] {
+    color: #f59e0b;
+}
+
+select#taskPriority option[value="ALTA"] {
+    color: #ef4444;
+}
+
+/* Efeito de foco melhorado */
+.form-group select:focus {
+    border-color: var(--purple-dark);
+    box-shadow: 0 0 0 2px rgba(76, 29, 149, 0.3);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    select {
+        padding: 0.65rem;
+        font-size: 0.85rem;
+    }
+    
+    select {
+        background-position: right 0.65rem center;
+        padding-right: 2.2rem;
+    }
+}
+
+/* ===== BACKGROUND COM IMAGEM ===== */
+/* BACKGROUND COM IMAGEM */
+.background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    background-image: url('../img/fundo.png'); /* Altere para o caminho da sua imagem */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg,
+        rgba(10, 10, 10, 0.85) 0%,
+        rgba(26, 26, 26, 0.80) 50%,
+        rgba(10, 10, 10, 0.90) 100%
+    );
+    backdrop-filter: blur(2px);
+}
+
+
+/* ===== BACKGROUND COM IMAGEM - CORRIGIDO ===== */
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-image: url('img/fundo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg,
+        rgba(10, 10, 10, 0.85) 0%,
+        rgba(26, 26, 26, 0.80) 50%,
+        rgba(10, 10, 10, 0.90) 100%
+    );
+    backdrop-filter: blur(2px);
+}
+
+/* Garantir que o conteúdo fique acima do background */
+.app-container {
+    position: relative;
+    z-index: 1;
+}
+
+/* ===== BACKGROUND FIX ===== */
+#main-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1000;
+    background-image: url('../img/fundo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.background-overlay-fixed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg,
+        rgba(10, 10, 10, 0.92) 0%,
+        rgba(26, 26, 26, 0.88) 50%,
+        rgba(10, 10, 10, 0.95) 100%
+    );
+}
+
+/* Garantir que o conteúdo fique acima do background */
+.app-container {
+    position: relative;
+    z-index: 1;
+}
+
+
