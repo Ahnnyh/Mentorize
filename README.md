@@ -28,24 +28,21 @@ Conecte-se ao servidor MySQL local
 Copie o conteúdo do db.sql e rode
 
 ## Verificar Instalação do Java
-bash
 java -version (Deve mostrar: java version "17" ou superior)
 
 javac -version (Deve mostrar: javac 17 ou superior)
 
 ## Verificar Instalação do Maven
-bash
 mvn -version (Deve mostrar: Apache Maven 3.6+)
 
 ## Executar a Aplicação
-Executar a aplicação Spring Boot
-Navegar até a pasta do projeto
+Navegar até a pasta do projeto: 
 cd mentorize
 
-Limpar e compilar
+Limpar e compilar: 
 mvn clean compile
 
-Executar a aplicação
+Executar a aplicação: 
 mvn spring-boot:run
 
 ## Acessar a Aplicação
